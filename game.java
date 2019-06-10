@@ -1,0 +1,50 @@
+package term_proj;
+
+//game.java
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class game {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		PictureChange ch = new PictureChange();
+
+		ch.setTitle("Game");
+		ch.panel1 = new Body1(ch);
+		ch.panel2 = new Body2(ch);
+
+		ch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ch.getContentPane().add(ch.panel1);
+		ch.pack();
+		ch.setVisible(true);
+	}
+
+}
+
+class PictureChange extends JFrame {
+
+	Body1 panel1 = null;
+	Body2 panel2 = null;
+
+	public void change(String name) {
+
+		if (name.equals("picture1")) {
+			getContentPane().removeAll();
+			getContentPane().add(panel1);
+			pack();
+			setVisible(true);
+			revalidate();
+			repaint();
+		} else {
+			getContentPane().removeAll();
+			getContentPane().add(panel2);
+			pack();
+			setVisible(true);
+			revalidate();
+			repaint();
+		}
+	}
+}
