@@ -59,25 +59,25 @@ public class Body2 extends JPanel {
 		getitem.setFont(new Font("Serif", Font.BOLD, 15));
 		add(getitem);
 
-		item1 = new JLabel("Item1 :");
+		item1 = new JLabel("Item1 : 0");
 		item1.setBounds(500, 150, 100, 30);
 		item1.setForeground(Color.cyan); // ID 글자색(핑크)
 		item1.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item1);
 
-		item2 = new JLabel("Item2 :");
+		item2 = new JLabel("Item2 : 0");
 		item2.setBounds(500, 200, 100, 30);
 		item2.setForeground(Color.cyan); // ID 글자색(핑크)
 		item2.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item2);
 
-		item3 = new JLabel("Item3 :");
+		item3 = new JLabel("Item3 : 0");
 		item3.setBounds(500, 250, 100, 30);
 		item3.setForeground(Color.cyan); // ID 글자색(핑크)
 		item3.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item3);
 
-		item4 = new JLabel("Item4 :");
+		item4 = new JLabel("Item4 : 0");
 		item4.setBounds(500, 300, 100, 30);
 		item4.setForeground(Color.cyan); // ID 글자색(핑크)
 		item4.setFont(new Font("Serif", Font.BOLD, 15));
