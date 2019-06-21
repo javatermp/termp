@@ -26,16 +26,19 @@ public class Body1 extends JPanel {
 		pf = new JPasswordField();
 
 		setPreferredSize(new Dimension(500, 300));
-		setBackground(Color.lightGray);
-//		img = new ImageIcon("C:/Users/MELEE/eclipse-workspace/TP/src/TP/Background1.gif");
-
-		la1.setBounds(120, 40, 50, 20); // ID
-		tf.setBounds(150, 40, 200, 35); // ID 입력값
+		img = new ImageIcon("C:/Users/MELEE/eclipse-workspace/TP/src/TP/Background1.gif");
+		
+		la1.setBounds(120, 40, 50, 20);
+		la1.setForeground(Color.pink);
+		la1.setFont(new Font("Serif", Font.BOLD, 15));
+		tf.setBounds(150, 40, 200, 35);
 		add(la1);
 		add(tf);
 
-		la2.setBounds(120, 120, 50, 20); // PW
-		pf.setBounds(150, 120, 200, 35); // PW 입력값
+		la2.setBounds(120, 120, 50, 20);
+		la2.setForeground(Color.pink);
+		la2.setFont(new Font("Serif", Font.BOLD, 15));
+		pf.setBounds(150, 120, 200, 35);
 		add(la2);
 		add(pf);
 
@@ -46,12 +49,11 @@ public class Body1 extends JPanel {
 		add(button);
 	}
 
-//	public void paintComponent(Graphics g)
-//    {
-//		super.paintComponent(g);
-//        // Draws the img to the BackgroundPanel.
-//        g.drawImage(img.getImage(), 0, 0, null);
-//    }
+	public void paintComponent(Graphics g)
+    {
+		super.paintComponent(g);
+        g.drawImage(img.getImage(), 0, 0, this);
+    }
 
 	private class ChangeListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
