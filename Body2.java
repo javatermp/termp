@@ -23,47 +23,64 @@ public class Body2 extends JPanel {
 	static boolean judge4 = true;
 	static int current_gold = 0, current_exp = 0;
 	static int current_item1 = 0, current_item2 = 0, current_item3 = 0, current_item4 = 0;
+	private ImageIcon img;
 
 	public Body2(PictureChange temp) {
 		setLayout(null);
 		ch = temp;
 
 		setPreferredSize(new Dimension(800, 700));
-		setBackground(Color.lightGray);
-		
+		img = new ImageIcon("C:/Users/MELEE/eclipse-workspace/TP/src/TP/Background2.gif");
+
 		log = new JTextArea();
+		log.setFont(new Font("Serif", Font.PLAIN, 14));
+		log.setDisabledTextColor(Color.black);
 		log.disable();
 		scroll = new JScrollPane(log);
 		scroll.setLocation(50, 50);
 		scroll.setSize(400, 450);
 		add(scroll);
-		
-		gold = new JLabel("Gold : 0");
-		gold.setBounds(650,50,130,30);
-		add(gold);
-		
-		exp = new JLabel("Exp : 0");
-		exp.setBounds(500,50,130,30);
+
+		exp = new JLabel("경험치 : ");
+		exp.setBounds(500, 50, 130, 30);
+		exp.setForeground(Color.magenta); // ID 글자색(핑크)
+		exp.setFont(new Font("Serif", Font.BOLD, 15));
 		add(exp);
-		
+
+		gold = new JLabel("골드 : ");
+		gold.setBounds(650, 50, 130, 30);
+		gold.setForeground(Color.ORANGE); // ID 글자색(핑크)
+		gold.setFont(new Font("Serif", Font.BOLD, 15));
+		add(gold);
+
 		getitem = new JLabel("획득 아이템 : ");
-	    getitem.setBounds(500,100,100,30);
-	    add(getitem);
-		
-		item1 = new JLabel("Item1 : 0");
-		item1.setBounds(500,150,100,30);
+		getitem.setBounds(500, 100, 100, 30);
+		getitem.setForeground(Color.PINK); // ID 글자색(핑크)
+		getitem.setFont(new Font("Serif", Font.BOLD, 15));
+		add(getitem);
+
+		item1 = new JLabel("Item1 :");
+		item1.setBounds(500, 150, 100, 30);
+		item1.setForeground(Color.cyan); // ID 글자색(핑크)
+		item1.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item1);
-		
-		item2 = new JLabel("Item2 : 0");
-		item2.setBounds(500,200,100,30);
+
+		item2 = new JLabel("Item2 :");
+		item2.setBounds(500, 200, 100, 30);
+		item2.setForeground(Color.cyan); // ID 글자색(핑크)
+		item2.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item2);
-		
-		item3 = new JLabel("Item3 : 0");
-		item3.setBounds(500,250,100,30);
+
+		item3 = new JLabel("Item3 :");
+		item3.setBounds(500, 250, 100, 30);
+		item3.setForeground(Color.cyan); // ID 글자색(핑크)
+		item3.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item3);
-		
-		item4 = new JLabel("Item4 : 0");
-		item4.setBounds(500,300,100,30);
+
+		item4 = new JLabel("Item4 :");
+		item4.setBounds(500, 300, 100, 30);
+		item4.setForeground(Color.cyan); // ID 글자색(핑크)
+		item4.setFont(new Font("Serif", Font.BOLD, 15));
 		add(item4);
 
 		button = new JButton("게임종료");
@@ -97,6 +114,11 @@ public class Body2 extends JPanel {
 		add(map4);
 	}
 
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(img.getImage(), 0, 0, this);
+	}
+
 	static void addLog(Object text) {
 		log.append(text + "\n");
 		log.setCaretPosition(log.getDocument().getLength());
@@ -114,8 +136,8 @@ public class Body2 extends JPanel {
 			judge2 = false;
 			judge3 = false;
 			judge4 = false;
-			gold.setText("Gold : 0");
-			exp.setText("Exp : 0");
+			gold.setText("골드 : 0");
+			exp.setText("경험치 : 0");
 			item1.setText("Item1 : 0");
 			item2.setText("Item2 : 0");
 			item3.setText("Item3 : 0");
@@ -190,26 +212,32 @@ class Map1 extends Thread {
 	public synchronized void run() {
 		Body2.addLog("Map1에 입장하였습니다");
 		while (Body2.num == 1) {
-			if(!Body2.judge1) {
+			if (!Body2.judge1) {
 				Body2.judge1 = true;
 				Body2.judge2 = true;
 				Body2.judge3 = true;
 				Body2.judge4 = true;
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			}
 			map1_gold = r.nextInt(10) + 1;
 			map1_exp = r.nextInt(10) + 1;
 			Body2.current_gold += map1_gold;
 			Body2.current_exp += map1_exp;
-			if(r.nextInt(10) >= 2) {
+			if (r.nextInt(10) >= 2) {
 				Body2.addLog(map1_gold + "gold, " + map1_exp + "exp를 획득하였습니다.");
 			} else {
 				item1++;
 				Body2.current_item1 = item1;
 				Body2.addLog(map1_gold + "gold, " + map1_exp + "exp, item1을 1개 획득하였습니다.");
 			}
-			Body2.gold.setText("Gold : " + Body2.current_gold);
-			Body2.exp.setText("Exp : " + Body2.current_exp);
+			Body2.gold.setText("골드 : " + Body2.current_gold);
+			Body2.exp.setText("경험치 : " + Body2.current_exp);
 			Body2.item1.setText("Item1 : " + Body2.current_item1);
 			try {
 				sleep(1000);
@@ -232,26 +260,32 @@ class Map2 extends Thread {
 	public synchronized void run() {
 		Body2.addLog("Map2에 입장하였습니다");
 		while (Body2.num == 2) {
-			if(!Body2.judge2) {
+			if (!Body2.judge2) {
 				Body2.judge1 = true;
 				Body2.judge2 = true;
 				Body2.judge3 = true;
 				Body2.judge4 = true;
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			}
 			map2_gold = r.nextInt(90) + 11;
 			map2_exp = r.nextInt(90) + 11;
 			Body2.current_gold += map2_gold;
 			Body2.current_exp += map2_exp;
-			if(r.nextInt(10) >= 2) {
+			if (r.nextInt(10) >= 2) {
 				Body2.addLog(map2_gold + "gold, " + map2_exp + "exp를 획득하였습니다.");
 			} else {
 				item2++;
 				Body2.current_item2 = item2;
 				Body2.addLog(map2_gold + "gold, " + map2_exp + "exp, item2을 1개 획득하였습니다.");
 			}
-			Body2.gold.setText("Gold : " + Body2.current_gold);
-			Body2.exp.setText("Exp : " + Body2.current_exp);
+			Body2.gold.setText("골드 : " + Body2.current_gold);
+			Body2.exp.setText("경험치 : " + Body2.current_exp);
 			Body2.item2.setText("Item2 : " + Body2.current_item2);
 			try {
 				sleep(1000);
@@ -274,26 +308,32 @@ class Map3 extends Thread {
 	public synchronized void run() {
 		Body2.addLog("Map3에 입장하였습니다");
 		while (Body2.num == 3) {
-			if(!Body2.judge3) {
+			if (!Body2.judge3) {
 				Body2.judge1 = true;
 				Body2.judge2 = true;
 				Body2.judge3 = true;
 				Body2.judge4 = true;
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			}
 			map3_gold = r.nextInt(900) + 101;
 			map3_exp = r.nextInt(900) + 101;
 			Body2.current_gold += map3_gold;
 			Body2.current_exp += map3_exp;
-			if(r.nextInt(10) >= 2) {
+			if (r.nextInt(10) >= 2) {
 				Body2.addLog(map3_gold + "gold, " + map3_exp + "exp를 획득하였습니다.");
 			} else {
 				item3++;
 				Body2.current_item3 = item3;
 				Body2.addLog(map3_gold + "gold, " + map3_exp + "exp, item3을 1개 획득하였습니다.");
 			}
-			Body2.gold.setText("Gold : " + Body2.current_gold);
-			Body2.exp.setText("Exp : " + Body2.current_exp);
+			Body2.gold.setText("골드 : " + Body2.current_gold);
+			Body2.exp.setText("경험치 : " + Body2.current_exp);
 			Body2.item3.setText("Item3 : " + Body2.current_item3);
 			try {
 				sleep(1000);
@@ -316,26 +356,32 @@ class Map4 extends Thread {
 	public synchronized void run() {
 		Body2.addLog("Map4에 입장하였습니다");
 		while (Body2.num == 4) {
-			if(!Body2.judge4) {
+			if (!Body2.judge4) {
 				Body2.judge1 = true;
 				Body2.judge2 = true;
 				Body2.judge3 = true;
 				Body2.judge4 = true;
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			}
 			map4_gold = r.nextInt(9000) + 1001;
 			map4_exp = r.nextInt(9000) + 1001;
 			Body2.current_gold += map4_gold;
 			Body2.current_exp += map4_exp;
-			if(r.nextInt(10) >= 2) {
+			if (r.nextInt(10) >= 2) {
 				Body2.addLog(map4_gold + "gold, " + map4_exp + "exp를 획득하였습니다.");
 			} else {
 				item4++;
 				Body2.current_item4 = item4;
 				Body2.addLog(map4_gold + "gold, " + map4_exp + "exp, item4을 1개 획득하였습니다.");
 			}
-			Body2.gold.setText("Gold : " + Body2.current_gold);
-			Body2.exp.setText("Exp : " + Body2.current_exp);
+			Body2.gold.setText("골드 : " + Body2.current_gold);
+			Body2.exp.setText("경험치 : " + Body2.current_exp);
 			Body2.item4.setText("Item4 : " + Body2.current_item4);
 			try {
 				sleep(1000);
