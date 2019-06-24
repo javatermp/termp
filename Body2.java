@@ -2,12 +2,7 @@ package term_proj;
 
 //Body2.java
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-
-public class Body2 extends JPanel {
+lic class Body2 extends JPanel {
 	private JButton button;
 	private JButton map1, map2, map3, map4;
 	private static JTextArea log;
